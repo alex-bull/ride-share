@@ -43,4 +43,20 @@ public class DriverController implements Initializable {
         getPrimaryStage().setScene(scene);
     }
 
+    @FXML
+    private void loadCreateTripsView() throws Exception {
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("createTrips.fxml"));
+        Scene scene = new Scene(root);
+        getPrimaryStage().setTitle("Create a New Trip");
+        getPrimaryStage().setScene(scene);
+    }
+
+    @FXML
+    private void loadCreateRouteView() throws Exception {
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("createRoute.fxml"));
+        Scene scene = new Scene(root);
+        getPrimaryStage().setTitle("Create a New Route");
+        getPrimaryStage().setScene(scene);
+    }
+
 }

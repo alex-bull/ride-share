@@ -36,6 +36,8 @@ public class Database{
         return userArrayList;
     }
 
+    public static ObservableList<StopPoint> getStopPointArrayList() { return stopPointArrayList; }
+
 
     public static void addUser(){
         userArrayList.add(new User());
@@ -44,7 +46,7 @@ public class Database{
 
     private static boolean checkForDuplicates(ArrayList<TextField> pointFieldArrayList){
         for (StopPoint point : stopPointArrayList){
-            if(point.getStreet().equals(pointFieldArrayList.get(0).getText()) && point.getSuburb().equals(pointFieldArrayList.get(0).getText())){
+            if(point.getStreet().equals(pointFieldArrayList.get(0).getText()) && point.getSuburb().equals(pointFieldArrayList.get(1).getText())){
                 return true;
             }
         }
@@ -57,6 +59,7 @@ public class Database{
             stopPointArrayList.add(new StopPoint(pointFieldArrayList.get(0).getText(), pointFieldArrayList.get(1).getText()));
             System.out.println("Point added");
             System.out.println(pointFieldArrayList.get(0).getText());
+            System.out.println(pointFieldArrayList.get(1).getText());
 
             Parent root = FXMLLoader.load(getDefaultClassLoader().getResource("driverTools.fxml"));
             Scene scene = new Scene(root);
