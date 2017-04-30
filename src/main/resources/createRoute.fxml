@@ -19,7 +19,8 @@
          </padding>
         </Label>
       <Button fx:id="backButton" layoutX="43.0" layoutY="344.0" mnemonicParsing="false" onAction="#loadDriverView" text="Back" />
-      <ListView fx:id="stopListView" layoutX="93.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" />
-      <ListView fx:id="routeListView" layoutX="333.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" />
+      <ListView fx:id="stopListView" layoutX="93.0" layoutY="100.0" onMouseClicked="#addStop" prefHeight="200.0" prefWidth="200.0" />
+      <ListView fx:id="routeListView" layoutX="333.0" layoutY="100.0" onMouseClicked="#removeStop" prefHeight="200.0" prefWidth="200.0" />
+      <Button fx:id="submitButton" layoutX="398.0" layoutY="344.0" mnemonicParsing="false" onAction="#submitRoute" text="Submit" />
     </children>
 </Pane>

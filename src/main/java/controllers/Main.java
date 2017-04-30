@@ -30,6 +30,7 @@ public class Main extends Application {
         primaryStage.show();
 
         Database.addUser();
+        Database.populateTimes();
     }
 
 

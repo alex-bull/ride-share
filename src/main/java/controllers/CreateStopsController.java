@@ -26,6 +26,11 @@ public class CreateStopsController implements Initializable{
     private ArrayList<TextField> pointFieldArrayList = new ArrayList<>();
 
 
+    /**
+     * Add FXML form field references into an array.
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         pointFieldArrayList.add(streetField);
@@ -33,6 +38,10 @@ public class CreateStopsController implements Initializable{
     }
 
 
+    /**
+     * Changes the scene to the driver tools menu.
+     * @throws Exception
+     */
     @FXML
     private void loadDriverView() throws Exception{
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("driverTools.fxml"));
@@ -41,6 +50,10 @@ public class CreateStopsController implements Initializable{
         getPrimaryStage().setScene(scene);
     }
 
+    /**
+     * Makes call to a method to submit a new point to the database when the submit button is pressed.
+     * @throws Exception
+     */
     @FXML
     private void submitButtonPress() throws Exception {
         Database.submitPoint(pointFieldArrayList);

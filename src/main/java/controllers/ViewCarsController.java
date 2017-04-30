@@ -21,12 +21,20 @@ public class ViewCarsController implements Initializable {
     @FXML
     private ListView carListView;
 
-
+    /**
+     * Displays relavent elements in the car list view.
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         carListView.setItems(Database.getUserArrayList().get(getUserID()).getCarArrayList());
     }
 
+    /**
+     * Changes the scene to the driver tools menu.
+     * @throws Exception
+     */
     @FXML
     private void loadDriverView() throws Exception{
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("driverTools.fxml"));
@@ -35,6 +43,10 @@ public class ViewCarsController implements Initializable {
         getPrimaryStage().setScene(scene);
     }
 
+    /**
+     * Changes the scene to the register cars form/menu
+     * @throws Exception
+     */
     @FXML
     private void loadRegisterView() throws Exception{
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("registerCar.fxml"));
@@ -43,6 +55,9 @@ public class ViewCarsController implements Initializable {
         getPrimaryStage().setScene(scene);
     }
 
+    /**
+     * Makes a call to a remove car from user method when the remove car button is pressed.
+     */
     @FXML
     private void removeCarButtonPress(){
         removeCar(carListView.getSelectionModel().getSelectedIndex());
