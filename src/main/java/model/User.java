@@ -28,10 +28,9 @@ public class User {
     }
 
 
-
     public void addToRoute(StopPoint stop){
         if(stop != null){
-            StopPoint newStop = StopPoint.newInstance(stop);
+            StopPoint newStop = stop.newInstance(stop);
             route.add(newStop);
             System.out.println(stop + "added");
         }

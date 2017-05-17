@@ -10,8 +10,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
-
 
 import static controllers.App.getPrimaryStage;
 import static javafx.collections.FXCollections.observableArrayList;
@@ -129,7 +127,7 @@ public class Database{
             newCurrentTrip();
             ObservableList<StopPoint> clonedRoute = observableArrayList();
             for (StopPoint i : routeToExpand){
-                StopPoint clonedPoint = StopPoint.newInstance(i);
+                StopPoint clonedPoint = i.newInstance(i);
                 clonedRoute.add(clonedPoint);
             }
             currentTrip.setRoute(clonedRoute);

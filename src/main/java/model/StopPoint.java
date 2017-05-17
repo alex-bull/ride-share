@@ -15,7 +15,7 @@ public class StopPoint {
         this.time = time;
     }
 
-    public static StopPoint newInstance(StopPoint aStopPoint) {
+    public StopPoint newInstance(StopPoint aStopPoint) {
         return new StopPoint(aStopPoint.street, aStopPoint.suburb, aStopPoint.time);
     }
 
