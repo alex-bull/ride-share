@@ -12,8 +12,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import static controllers.Main.getPrimaryStage;
-import static model.Database.submitCar;
+import static controllers.App.getDatabase;
+import static controllers.App.getPrimaryStage;
 
 
 public class RegisterCarController implements Initializable {
@@ -33,8 +33,11 @@ public class RegisterCarController implements Initializable {
 
     private ArrayList<TextField> carFieldArrayList = new ArrayList<>();
 
+    private Database database;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        database = getDatabase();
         carFieldArrayList.add(typeField);
         carFieldArrayList.add(modelField);
         carFieldArrayList.add(colourField);
@@ -53,6 +56,6 @@ public class RegisterCarController implements Initializable {
 
     @FXML
     private void submitCarButtonPress() throws Exception {
-        Database.submitCar(carFieldArrayList);
+        database.submitCar(carFieldArrayList);
     }
 }

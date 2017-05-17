@@ -1,14 +1,9 @@
 package model;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import javafx.collections.ObservableList;
 
-import java.sql.Time;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.chrono.Chronology;
 import java.util.ArrayList;
-import java.util.Date;
 
 import static javafx.collections.FXCollections.observableArrayList;
 

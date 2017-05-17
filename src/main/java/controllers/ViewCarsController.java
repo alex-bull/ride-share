@@ -11,15 +11,15 @@ import model.Database;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static controllers.Main.getPrimaryStage;
-import static model.Database.getUserID;
-import static model.Database.removeCar;
+import static controllers.App.getPrimaryStage;
 
 
 public class ViewCarsController implements Initializable {
 
     @FXML
     private ListView carListView;
+
+    private Database database;
 
     /**
      * Displays relavent elements in the car list view.
@@ -28,7 +28,8 @@ public class ViewCarsController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        carListView.setItems(Database.getUserArrayList().get(getUserID()).getCarArrayList());
+        database =  App.getDatabase();
+        carListView.setItems(App.getDatabase().getUserArrayList().get(database.getUserID()).getCarArrayList());
     }
 
     /**
@@ -60,7 +61,7 @@ public class ViewCarsController implements Initializable {
      */
     @FXML
     private void removeCarButtonPress(){
-        removeCar(carListView.getSelectionModel().getSelectedIndex());
+        database.removeCar(carListView.getSelectionModel().getSelectedIndex());
     }
 
 

@@ -2,11 +2,7 @@ package model;
 
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
-
 import static javafx.collections.FXCollections.observableArrayList;
-import static model.Database.getUserArrayList;
-import static model.Database.getUserID;
 
 
 public class User {

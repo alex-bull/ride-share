@@ -12,7 +12,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
-import static controllers.Main.getPrimaryStage;
+
+import static controllers.App.getPrimaryStage;
 import static javafx.collections.FXCollections.observableArrayList;
 import static javafx.fxml.FXMLLoader.getDefaultClassLoader;
 
@@ -21,44 +22,44 @@ import static javafx.fxml.FXMLLoader.getDefaultClassLoader;
  */
 public class Database{
 
-    private static ObservableList<StopPoint> stopPointArrayList = observableArrayList();
-    public static ObservableList<StopPoint> getStopPointArrayList() { return stopPointArrayList; }
+    private ObservableList<StopPoint> stopPointArrayList = observableArrayList();
+    public ObservableList<StopPoint> getStopPointArrayList() { return stopPointArrayList; }
 
-    private static ObservableList<Trip> tripArrayList = observableArrayList();
-    public static ObservableList<Trip> getTripArrayList() { return tripArrayList; }
+    private ObservableList<Trip> tripArrayList = observableArrayList();
+    public ObservableList<Trip> getTripArrayList() { return tripArrayList; }
 
-    private static ArrayList<User> userArrayList = new ArrayList<>();
-    public static void addUser(){
+    private ArrayList<User> userArrayList = new ArrayList<>();
+    public void addUser(){
         userArrayList.add(new User());
     }
-    public static ArrayList<User> getUserArrayList(){
+    public ArrayList<User> getUserArrayList(){
         return userArrayList;
     }
 
-    private static int userID = 0;
-    public static int getUserID(){
+    private int userID = 0;
+    public int getUserID(){
         return userID;
     }
 
-    private static Trip currentTrip = new Trip(null, null, null, null);
+    private Trip currentTrip = new Trip(null, null, null, null);
 
-    public static ObservableList<StopPoint> getCurrentRoute(){
+    public ObservableList<StopPoint> getCurrentRoute(){
         return currentTrip.getRoute();
     }
 
-    private static ObservableList<LocalTime> times = observableArrayList(LocalTime.MIN);
-    public static ObservableList<LocalTime> getTimes(){
+    private ObservableList<LocalTime> times = observableArrayList(LocalTime.MIN);
+    public ObservableList<LocalTime> getTimes(){
         return times;
     }
 
-    public static void populateTimes(){
+    public void populateTimes(){
         for (int i = 0; i<287; i++){
             times.add(times.get(i).plusMinutes(5));
         }
 
     }
 
-    private static boolean checkForDuplicates(ArrayList<TextField> pointFieldArrayList){
+    private boolean checkForDuplicates(ArrayList<TextField> pointFieldArrayList){
         for (StopPoint point : stopPointArrayList){
             if(point.getStreet().equals(pointFieldArrayList.get(0).getText()) && point.getSuburb().equals(pointFieldArrayList.get(1).getText())){
                 return true;
@@ -68,7 +69,7 @@ public class Database{
     }
 
 
-    public static void submitPoint(ArrayList<TextField> pointFieldArrayList) throws Exception {
+    public void submitPoint(ArrayList<TextField> pointFieldArrayList) throws Exception {
         if((!pointFieldArrayList.get(0).getText().isEmpty()) && (!pointFieldArrayList.get(1).getText().isEmpty()) && (!checkForDuplicates(pointFieldArrayList))){
             stopPointArrayList.add(new StopPoint(pointFieldArrayList.get(0).getText(), pointFieldArrayList.get(1).getText(), null));
             System.out.println("Point added");
@@ -93,7 +94,7 @@ public class Database{
     }
 
 
-    public static void submitCar(ArrayList<TextField> carFieldArrayList) throws Exception {
+    public void submitCar(ArrayList<TextField> carFieldArrayList) throws Exception {
         if((!carFieldArrayList.get(0).getText().isEmpty()) && (!carFieldArrayList.get(1).getText().isEmpty()) && (!carFieldArrayList.get(2).getText().isEmpty()) && (!carFieldArrayList.get(3).getText().isEmpty()) && (!carFieldArrayList.get(4).getText().isEmpty()) && (!carFieldArrayList.get(5).getText().isEmpty())){
             userArrayList.get(userID).getCarArrayList().add(new Car(carFieldArrayList.get(0).getText(), carFieldArrayList.get(1).getText(), carFieldArrayList.get(2).getText(), carFieldArrayList.get(3).getText(), carFieldArrayList.get(4).getText(), carFieldArrayList.get(5).getText()));
             System.out.println("Car added");
@@ -117,15 +118,15 @@ public class Database{
     }
 
 
-    public static void removeCar(int indexOfSelected){
+    public void removeCar(int indexOfSelected){
         userArrayList.get(userID).getCarArrayList().remove(indexOfSelected);
     }
 
 
 
-    public static void expandRoute(ObservableList<StopPoint> routeToExpand) {
+    public void expandRoute(ObservableList<StopPoint> routeToExpand) {
         if(routeToExpand != null) {
-            Database.newCurrentTrip();
+            newCurrentTrip();
             ObservableList<StopPoint> clonedRoute = observableArrayList();
             for (StopPoint i : routeToExpand){
                 StopPoint clonedPoint = StopPoint.newInstance(i);
@@ -135,15 +136,15 @@ public class Database{
         }
     }
 
-    public static void updateRecurrentDays(Boolean Mon, Boolean Tue, Boolean Wed, Boolean Thu, Boolean Fri, Boolean Sat, Boolean Sun){
+    public void updateRecurrentDays(Boolean Mon, Boolean Tue, Boolean Wed, Boolean Thu, Boolean Fri, Boolean Sat, Boolean Sun){
         currentTrip.setDays(new ArrayList<>(Arrays.asList(Mon, Tue, Wed, Thu, Fri, Sat, Sun)));
     }
 
-    public static void updateRecurrentStatus(boolean status){
+    public void updateRecurrentStatus(boolean status){
         currentTrip.setRecurrent(status);
     }
 
-    public static boolean submitTrip(){
+    public boolean submitTrip(){
         if (currentTrip.getRoute() != null) {
             tripArrayList.add(currentTrip);
             getUserArrayList().get(getUserID()).getUserTrips().add(currentTrip);
@@ -154,15 +155,15 @@ public class Database{
         }
     }
 
-    public static void newCurrentTrip(){
+    public void newCurrentTrip(){
         currentTrip = new Trip(null, false, new ArrayList<>(Arrays.asList(false, false, false, false, false, false, false)), null);
     }
 
-    public static void updateTripDate(LocalDate aDate){
+    public void updateTripDate(LocalDate aDate){
         currentTrip.setDate(aDate);
     }
 
-    public static void updateTime(Object aTime, Object aStop) {
+    public void updateTime(Object aTime, Object aStop) {
         StopPoint selectedStop = (StopPoint) aStop;
         selectedStop.setTime(aTime);
     }

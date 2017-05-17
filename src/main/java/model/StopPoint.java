@@ -1,12 +1,6 @@
 package model;
 
-import javafx.collections.ObservableList;
-
-import java.sql.Time;
 import java.time.LocalTime;
-import java.util.Timer;
-
-import static javafx.collections.FXCollections.observableArrayList;
 
 public class StopPoint {
 

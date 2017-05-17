@@ -9,13 +9,14 @@ import javafx.scene.Scene;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static controllers.Main.getPrimaryStage;
+import static controllers.App.getPrimaryStage;
 
 
 public class MainMenuController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        App.getDatabase();
 
     }
 
@@ -29,7 +30,8 @@ public class MainMenuController implements Initializable {
 
     @FXML
     private void loadPassengerView() throws Exception{
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("passengerTools.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        Parent root = loader.load(getClass().getClassLoader().getResource("passengerTools.fxml"));
         Scene scene = new Scene(root);
         getPrimaryStage().setTitle("Welcome");
         getPrimaryStage().setScene(scene);

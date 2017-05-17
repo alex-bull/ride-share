@@ -9,7 +9,7 @@ import javafx.scene.Scene;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static controllers.Main.getPrimaryStage;
+import static controllers.App.getPrimaryStage;
 
 
 public class DriverController implements Initializable {

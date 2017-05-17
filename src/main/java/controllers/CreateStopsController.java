@@ -6,14 +6,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import model.Database;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import static controllers.Main.getPrimaryStage;
-import static model.Database.submitPoint;
+import static controllers.App.getPrimaryStage;
 
 
 public class CreateStopsController implements Initializable{
@@ -56,7 +54,7 @@ public class CreateStopsController implements Initializable{
      */
     @FXML
     private void submitButtonPress() throws Exception {
-        Database.submitPoint(pointFieldArrayList);
+        App.getDatabase().submitPoint(pointFieldArrayList);
     }
 
 
