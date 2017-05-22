@@ -13,12 +13,14 @@ public class Trip {
     private Boolean recurrent;
     private ArrayList<Boolean> days;
     private LocalDate date;
+    private Integer direction;
 
-    Trip(ObservableList route, Boolean recurrent, ArrayList<Boolean> days, LocalDate date) {
+    Trip(ObservableList route, Boolean recurrent, ArrayList<Boolean> days, LocalDate date, Integer direction) {
         this.route = route;
         this.recurrent = recurrent;
         this.days = days;
         this.date = date;
+        this.direction = direction;
     }
 
     public void setDays(ArrayList<Boolean> dayArray){
@@ -41,13 +43,17 @@ public class Trip {
         return route;
     }
 
+    public void setDirection(Integer direction) {
+        this.direction = direction;
+    }
+
 //    public static Trip newInstance(Trip aTrip) {
 //        return new Trip(aTrip.route, aTrip.recurrent, aTrip.days);
 //    }
 
     @Override
     public String toString(){
-        return "route: " + route + " recurs?: " + recurrent + " days: " + days + " date: " + date;
+        return "route: " + route + " recurs?: " + recurrent + " days: " + days + " date: " + date + "direction" + direction;
     }
 
 

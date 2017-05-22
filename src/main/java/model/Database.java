@@ -39,7 +39,7 @@ public class Database{
         return userID;
     }
 
-    private Trip currentTrip = new Trip(null, null, null, null);
+    private Trip currentTrip = new Trip(null, null, null, null, 0);
 
     public ObservableList<StopPoint> getCurrentRoute(){
         return currentTrip.getRoute();
@@ -154,7 +154,7 @@ public class Database{
     }
 
     public void newCurrentTrip(){
-        currentTrip = new Trip(null, false, new ArrayList<>(Arrays.asList(false, false, false, false, false, false, false)), null);
+        currentTrip = new Trip(null, false, new ArrayList<>(Arrays.asList(false, false, false, false, false, false, false)), null, 0);
     }
 
     public void updateTripDate(LocalDate aDate){
@@ -164,5 +164,13 @@ public class Database{
     public void updateTime(Object aTime, Object aStop) {
         StopPoint selectedStop = (StopPoint) aStop;
         selectedStop.setTime(aTime);
+    }
+
+    public void updateDirections(Boolean toUni){
+        if (toUni == true){
+            currentTrip.setDirection(0);
+        } else {
+            currentTrip.setDirection(1);
+        }
     }
 }

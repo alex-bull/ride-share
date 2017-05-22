@@ -57,6 +57,12 @@ public class CreateTripsController implements Initializable {
     @FXML
     private ComboBox timesCombo;
 
+    @FXML
+    private CheckBox toUniCheckBox;
+
+    @FXML
+    private CheckBox fromUniCheckBox;
+
     private Database database;
 
 
@@ -93,6 +99,9 @@ public class CreateTripsController implements Initializable {
             sunCheck.setSelected(false);
             recurrentCheck.setSelected(false);
             recurrenceDate.setDisable(true);
+            toUniCheckBox.setSelected(true);
+            fromUniCheckBox.setSelected(false);
+            database.updateDirections(toUniCheckBox.isSelected());
         }
         routeListView.getSelectionModel().clearSelection();
     }
@@ -131,6 +140,19 @@ public class CreateTripsController implements Initializable {
         database.updateTime(timesCombo.getSelectionModel().getSelectedItem(), expandedListView.getSelectionModel().getSelectedItem());
         expandedListView.refresh();
     }
+
+    @FXML
+    private void toUniClicked(){
+        fromUniCheckBox.setSelected(!toUniCheckBox.isSelected());
+        database.updateDirections(toUniCheckBox.isSelected());
+    }
+
+    @FXML
+    private void fromUniClicked(){
+        toUniCheckBox.setSelected(!toUniCheckBox.isSelected());
+        database.updateDirections(toUniCheckBox.isSelected());
+    }
+
 
 
 }
