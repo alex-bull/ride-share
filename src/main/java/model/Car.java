@@ -7,15 +7,19 @@ public class Car {
     private String colour;
     private String license;
     private String year;
-    private String seatNum;
+    private Integer seatNum;
 
-    Car(String type, String model, String colour, String license, String year, String seatNum) {
+    Car(String type, String model, String colour, String license, String year, Integer seatNum) {
         this.type = type;
         this.model = model;
         this.colour = colour;
         this.license = license;
         this.year = year;
         this.seatNum = seatNum;
+    }
+
+    public Integer getSeatNum() {
+        return seatNum;
     }
 
     @Override

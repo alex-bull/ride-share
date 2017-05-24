@@ -7,6 +7,16 @@ import static javafx.collections.FXCollections.observableArrayList;
 
 public class User {
 
+    private Integer UserID;
+
+    User(Integer UserID){
+        this.UserID = UserID;
+    }
+
+    public Integer getUserID(){
+        return UserID;
+    }
+
     private ObservableList<StopPoint> route = observableArrayList();
     public ObservableList<StopPoint> getRoute(){
         return route;

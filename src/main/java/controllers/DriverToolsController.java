@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 import static controllers.App.getPrimaryStage;
 
 
-public class DriverController implements Initializable {
+public class DriverToolsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -56,6 +56,14 @@ public class DriverController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("createRoute.fxml"));
         Scene scene = new Scene(root);
         getPrimaryStage().setTitle("Create a New Route");
+        getPrimaryStage().setScene(scene);
+    }
+
+    @FXML
+    private void loadShareRideView() throws Exception {
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("shareRide.fxml"));
+        Scene scene = new Scene(root);
+        getPrimaryStage().setTitle("Share a Ride From Your Trips");
         getPrimaryStage().setScene(scene);
     }
 

@@ -70,7 +70,7 @@ public class CreateTripsController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         database = App.getDatabase();
         database.newCurrentTrip();
-        routeListView.setItems(database.getUserArrayList().get(database.getUserID()).getRouteArrayList());
+        routeListView.setItems(database.getUserHashMap().get(database.getUserID()).getRouteArrayList());
         expandedListView.setItems(database.getCurrentRoute());
         timesCombo.setItems(database.getTimes());
     }

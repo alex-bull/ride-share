@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import static controllers.App.getPrimaryStage;
 import static javafx.collections.FXCollections.observableArrayList;
@@ -26,17 +27,17 @@ public class Database{
     private ObservableList<Trip> tripArrayList = observableArrayList();
     public ObservableList<Trip> getTripArrayList() { return tripArrayList; }
 
-    private ArrayList<User> userArrayList = new ArrayList<>();
-    public void addUser(){
-        userArrayList.add(new User());
+    private HashMap<Integer, User> userHashMap = new HashMap<>();
+    public void addUser(Integer ID){
+        userHashMap.put(0, new User(ID));
     }
-    public ArrayList<User> getUserArrayList(){
-        return userArrayList;
+    public HashMap<Integer, User> getUserHashMap(){
+        return userHashMap;
     }
 
-    private int userID = 0;
+    private int currentUser = 0;
     public int getUserID(){
-        return userID;
+        return userHashMap.get(currentUser).getUserID();
     }
 
     private Trip currentTrip = new Trip(null, null, null, null, 0);
@@ -49,6 +50,8 @@ public class Database{
     public ObservableList<LocalTime> getTimes(){
         return times;
     }
+
+    private ObservableList<SharedRide> sharedRides = observableArrayList();
 
     public void populateTimes(){
         for (int i = 0; i<287; i++){
@@ -94,7 +97,7 @@ public class Database{
 
     public void submitCar(ArrayList<TextField> carFieldArrayList) throws Exception {
         if((!carFieldArrayList.get(0).getText().isEmpty()) && (!carFieldArrayList.get(1).getText().isEmpty()) && (!carFieldArrayList.get(2).getText().isEmpty()) && (!carFieldArrayList.get(3).getText().isEmpty()) && (!carFieldArrayList.get(4).getText().isEmpty()) && (!carFieldArrayList.get(5).getText().isEmpty())){
-            userArrayList.get(userID).getCarArrayList().add(new Car(carFieldArrayList.get(0).getText(), carFieldArrayList.get(1).getText(), carFieldArrayList.get(2).getText(), carFieldArrayList.get(3).getText(), carFieldArrayList.get(4).getText(), carFieldArrayList.get(5).getText()));
+            userHashMap.get(currentUser).getCarArrayList().add(new Car(carFieldArrayList.get(0).getText(), carFieldArrayList.get(1).getText(), carFieldArrayList.get(2).getText(), carFieldArrayList.get(3).getText(), carFieldArrayList.get(4).getText(), Integer.parseInt(carFieldArrayList.get(5).getText())));
             System.out.println("Car added");
             System.out.println(carFieldArrayList.get(0).getText());
 
@@ -117,7 +120,7 @@ public class Database{
 
 
     public void removeCar(int indexOfSelected){
-        userArrayList.get(userID).getCarArrayList().remove(indexOfSelected);
+        userHashMap.get(currentUser).getCarArrayList().remove(indexOfSelected);
     }
 
 
@@ -145,7 +148,7 @@ public class Database{
     public boolean submitTrip(){
         if (currentTrip.getRoute() != null) {
             tripArrayList.add(currentTrip);
-            getUserArrayList().get(getUserID()).getUserTrips().add(currentTrip);
+            getUserHashMap().get(getUserID()).getUserTrips().add(currentTrip);
             System.out.println(tripArrayList);
             return true;
         } else {
@@ -172,5 +175,11 @@ public class Database{
         } else {
             currentTrip.setDirection(1);
         }
+    }
+
+    public void submitSharedRide(Object route, Object seatNum) {
+        sharedRides.add(new SharedRide(observableArrayList(route), (Integer) seatNum, getUserHashMap().get(getUserID())));
+        System.out.println(sharedRides);
+        System.out.println(sharedRides.get(0).toString());
     }
 }

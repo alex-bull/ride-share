@@ -47,9 +47,6 @@ public class Trip {
         this.direction = direction;
     }
 
-//    public static Trip newInstance(Trip aTrip) {
-//        return new Trip(aTrip.route, aTrip.recurrent, aTrip.days);
-//    }
 
     @Override
     public String toString(){

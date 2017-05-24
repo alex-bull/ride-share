@@ -23,7 +23,7 @@ public class App extends Application {
         primaryStage.setTitle("Welcome");
         primaryStage.setScene(scene);
 
-        database.addUser();
+        database.addUser(0);
         database.populateTimes();
 
         primaryStage.show();
