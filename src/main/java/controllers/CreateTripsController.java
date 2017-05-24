@@ -11,6 +11,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import model.Database;
+import model.Trip;
 
 import java.io.IOException;
 import java.net.URL;
@@ -64,6 +65,8 @@ public class CreateTripsController implements Initializable {
     private CheckBox fromUniCheckBox;
 
     private Database database;
+
+    private Trip currentTrip;
 
 
     @Override

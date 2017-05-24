@@ -24,9 +24,6 @@ public class Database{
     private ObservableList<StopPoint> stopPointArrayList = observableArrayList();
     public ObservableList<StopPoint> getStopPointArrayList() { return stopPointArrayList; }
 
-    private ObservableList<Trip> tripArrayList = observableArrayList();
-    public ObservableList<Trip> getTripArrayList() { return tripArrayList; }
-
     private HashMap<Integer, User> userHashMap = new HashMap<>();
     public void addUser(Integer ID){
         userHashMap.put(0, new User(ID));
@@ -128,12 +125,12 @@ public class Database{
     public void expandRoute(ObservableList<StopPoint> routeToExpand) {
         if(routeToExpand != null) {
             newCurrentTrip();
-            ObservableList<StopPoint> clonedRoute = observableArrayList();
-            for (StopPoint i : routeToExpand){
-                StopPoint clonedPoint = i.newInstance(i);
-                clonedRoute.add(clonedPoint);
-            }
-            currentTrip.setRoute(clonedRoute);
+//            ObservableList<StopPoint> clonedRoute = observableArrayList();
+//            for (StopPoint i : routeToExpand){
+//                StopPoint clonedPoint = i.newInstance(i);
+//                clonedRoute.add(clonedPoint);
+//            }
+            currentTrip.setRoute(routeToExpand);
         }
     }
 
@@ -147,9 +144,7 @@ public class Database{
 
     public boolean submitTrip(){
         if (currentTrip.getRoute() != null) {
-            tripArrayList.add(currentTrip);
             getUserHashMap().get(getUserID()).getUserTrips().add(currentTrip);
-            System.out.println(tripArrayList);
             return true;
         } else {
             return false;

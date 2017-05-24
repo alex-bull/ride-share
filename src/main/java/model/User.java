@@ -2,6 +2,7 @@ package model;
 
 import javafx.collections.ObservableList;
 
+import static controllers.App.getDatabase;
 import static javafx.collections.FXCollections.observableArrayList;
 
 
@@ -38,18 +39,21 @@ public class User {
     }
 
 
-    public void addToRoute(StopPoint stop){
+    public void addToRoute(StopPoint stop, ObservableList<StopPoint> stopShallowCopy){
         if(stop != null){
-            StopPoint newStop = stop.newInstance(stop);
-            route.add(newStop);
+            route.add(stop);
+            stopShallowCopy.remove(stop);
             System.out.println(stop + "added");
+//            System.out.println("route " + route + "               shallowcopy " + stopShallowCopy + "              original " + getDatabase().getStopPointArrayList());
         }
     }
 
-    public void removeFromRoute(Object stop){
+    public void removeFromRoute(Object stop, ObservableList<StopPoint> stopShallowCopy){
         if(stop != null){
             route.remove(stop);
+            stopShallowCopy.add((StopPoint) stop);
             System.out.println(stop + "removed");
+//            System.out.println("route " + route + "               shallowcopy " + stopShallowCopy + "              original " + getDatabase().getStopPointArrayList());
         }
     }
 

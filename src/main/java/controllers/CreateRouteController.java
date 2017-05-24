@@ -1,5 +1,7 @@
 package controllers;
 
+import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,6 +16,7 @@ import java.util.ResourceBundle;
 
 import static controllers.App.getDatabase;
 import static controllers.App.getPrimaryStage;
+import static javafx.collections.FXCollections.observableArrayList;
 
 
 public class CreateRouteController implements Initializable {
@@ -26,10 +29,13 @@ public class CreateRouteController implements Initializable {
 
     private Database database;
 
+    private ObservableList<StopPoint> stopShallowCopy;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         database = getDatabase();
-        stopListView.setItems(database.getStopPointArrayList());
+        stopShallowCopy = observableArrayList(database.getStopPointArrayList());
+        stopListView.setItems(stopShallowCopy);
         routeListView.setItems(database.getUserHashMap().get(database.getUserID()).getRoute());
     }
 
@@ -45,14 +51,14 @@ public class CreateRouteController implements Initializable {
     @FXML
     private void addStop(){
         Object selectedItem = stopListView.getSelectionModel().getSelectedItem();
-        database.getUserHashMap().get(database.getUserID()).addToRoute((StopPoint) selectedItem);
+        database.getUserHashMap().get(database.getUserID()).addToRoute((StopPoint) selectedItem, stopShallowCopy);
         stopListView.getSelectionModel().clearSelection();
     }
 
     @FXML
     private void removeStop(){
         Object selectedItem = routeListView.getSelectionModel().getSelectedItem();
-        database.getUserHashMap().get(database.getUserID()).removeFromRoute(selectedItem);
+        database.getUserHashMap().get(database.getUserID()).removeFromRoute(selectedItem, stopShallowCopy);
         routeListView.getSelectionModel().clearSelection();
     }
 
