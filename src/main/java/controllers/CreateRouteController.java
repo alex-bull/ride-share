@@ -36,12 +36,12 @@ public class CreateRouteController implements Initializable {
         database = getDatabase();
         stopShallowCopy = observableArrayList(database.getStopPointArrayList());
         stopListView.setItems(stopShallowCopy);
-        routeListView.setItems(database.getUserHashMap().get(database.getUserID()).getRoute());
+        routeListView.setItems(database.getCurrentUser().getRoute());
     }
 
     @FXML
     private void loadDriverView() throws Exception{
-        database.getUserHashMap().get(database.getUserID()).clearRoute();
+        database.getCurrentUser().clearRoute();
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("driverTools.fxml"));
         Scene scene = new Scene(root);
         getPrimaryStage().setTitle("Welcome");
@@ -51,20 +51,20 @@ public class CreateRouteController implements Initializable {
     @FXML
     private void addStop(){
         Object selectedItem = stopListView.getSelectionModel().getSelectedItem();
-        database.getUserHashMap().get(database.getUserID()).addToRoute((StopPoint) selectedItem, stopShallowCopy);
+        database.getCurrentUser().addToRoute((StopPoint) selectedItem, stopShallowCopy);
         stopListView.getSelectionModel().clearSelection();
     }
 
     @FXML
     private void removeStop(){
         Object selectedItem = routeListView.getSelectionModel().getSelectedItem();
-        database.getUserHashMap().get(database.getUserID()).removeFromRoute(selectedItem, stopShallowCopy);
+        database.getCurrentUser().removeFromRoute(selectedItem, stopShallowCopy);
         routeListView.getSelectionModel().clearSelection();
     }
 
     @FXML
     private void submitRoute() throws Exception {
-        database.getUserHashMap().get(database.getUserID()).submitRoute();
+        database.getCurrentUser().submitRoute();
         loadDriverView();
     }
 

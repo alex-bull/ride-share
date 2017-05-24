@@ -11,13 +11,18 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import model.Database;
+import model.StopPoint;
 import model.Trip;
 
+import javax.swing.text.TableView;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import static controllers.App.getPrimaryStage;
+import static javafx.collections.FXCollections.observableArrayList;
 
 
 public class CreateTripsController implements Initializable {
@@ -66,16 +71,19 @@ public class CreateTripsController implements Initializable {
 
     private Database database;
 
-    private Trip currentTrip;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         database = App.getDatabase();
-        database.newCurrentTrip();
-        routeListView.setItems(database.getUserHashMap().get(database.getUserID()).getRouteArrayList());
-        expandedListView.setItems(database.getCurrentRoute());
-        timesCombo.setItems(database.getTimes());
+        database.getCurrentUser().newCurrentTrip();
+        routeListView.setItems(database.getCurrentUser().getRouteArrayList());
+         //expandedListView.setItems((ObservableList) database.getCurrentUser().getCurrentTripRoute().keySet());
+        ObservableList<LocalTime> times = observableArrayList(LocalTime.MIN);
+        for (int i = 0; i<287; i++){
+            times.add(times.get(i).plusMinutes(5));
+        }
+        timesCombo.setItems(times);
     }
 
     @FXML
@@ -91,8 +99,9 @@ public class CreateTripsController implements Initializable {
     private void expandSelectedRoute(){
         Object selectedItem = routeListView.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
-            database.expandRoute((ObservableList) selectedItem);
-            expandedListView.setItems(database.getCurrentRoute());
+            database.getCurrentUser().setCurrentTripRoute((ObservableList) selectedItem);
+            expandedListView.setItems(database.getCurrentUser().getCurrentTripRoute());
+            System.out.println(expandedListView.getItems().get(0).toString());
             monCheck.setSelected(false);
             tueCheck.setSelected(false);
             wedCheck.setSelected(false);
@@ -104,7 +113,7 @@ public class CreateTripsController implements Initializable {
             recurrenceDate.setDisable(true);
             toUniCheckBox.setSelected(true);
             fromUniCheckBox.setSelected(false);
-            database.updateDirections(toUniCheckBox.isSelected());
+            database.getCurrentUser().updateDirections(toUniCheckBox.isSelected());
         }
         routeListView.getSelectionModel().clearSelection();
     }
@@ -112,7 +121,7 @@ public class CreateTripsController implements Initializable {
     @FXML
     private void submitTrip() throws IOException {
         if (!(recurrentCheck.isSelected() && recurrenceDate.getValue() == null)){
-            if (database.submitTrip()) {
+            if (database.getCurrentUser().submitTrip()) {
                 Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("driverTools.fxml"));
                 Scene scene = new Scene(root);
                 getPrimaryStage().setTitle("Welcome");
@@ -123,37 +132,37 @@ public class CreateTripsController implements Initializable {
 
     @FXML
     private void updateDays(){
-        database.updateRecurrentDays(monCheck.isSelected(), tueCheck.isSelected(), wedCheck.isSelected(), thuCheck.isSelected(), friCheck.isSelected(), satCheck.isSelected(), sunCheck.isSelected());
+        database.getCurrentUser().updateRecurrentDays(monCheck.isSelected(), tueCheck.isSelected(), wedCheck.isSelected(), thuCheck.isSelected(), friCheck.isSelected(), satCheck.isSelected(), sunCheck.isSelected());
     }
 
     @FXML
     private void updateRecurrent(){
-        database.updateRecurrentStatus(recurrentCheck.isSelected());
+        database.getCurrentUser().updateRecurrentStatus(recurrentCheck.isSelected());
         updateDate();
         recurrenceDate.setDisable(!recurrenceDate.isDisabled());
     }
 
     @FXML
     private void updateDate(){
-        database.updateTripDate(recurrenceDate.getValue());
+        database.getCurrentUser().updateTripDate(recurrenceDate.getValue());
     }
 
     @FXML
     private void updateTime(){
-        database.updateTime(timesCombo.getSelectionModel().getSelectedItem(), expandedListView.getSelectionModel().getSelectedItem());
+        database.getCurrentUser().updateTime((LocalTime) timesCombo.getSelectionModel().getSelectedItem(), (ArrayList) expandedListView.getSelectionModel().getSelectedItem());
         expandedListView.refresh();
     }
 
     @FXML
     private void toUniClicked(){
         fromUniCheckBox.setSelected(!toUniCheckBox.isSelected());
-        database.updateDirections(toUniCheckBox.isSelected());
+        database.getCurrentUser().updateDirections(toUniCheckBox.isSelected());
     }
 
     @FXML
     private void fromUniClicked(){
         toUniCheckBox.setSelected(!toUniCheckBox.isSelected());
-        database.updateDirections(toUniCheckBox.isSelected());
+        database.getCurrentUser().updateDirections(toUniCheckBox.isSelected());
     }
 
 

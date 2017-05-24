@@ -6,22 +6,17 @@ public class StopPoint {
 
     private String street;
     private String suburb;
-    private LocalTime time;
 
 
-    StopPoint(String street, String suburb, LocalTime time) {
+    StopPoint(String street, String suburb) {
         this.street = street;
         this.suburb = suburb;
-        this.time = time;
     }
 
     public StopPoint newInstance(StopPoint aStopPoint) {
-        return new StopPoint(aStopPoint.street, aStopPoint.suburb, aStopPoint.time);
+        return new StopPoint(aStopPoint.street, aStopPoint.suburb);
     }
 
-    public void setTime(Object aTime){
-        time = (LocalTime) aTime;
-    }
 
 
     public void setStreet(String i){
@@ -30,7 +25,7 @@ public class StopPoint {
 
     @Override
     public String toString(){
-        return street + " " + suburb + " " + time;
+        return street + " " + suburb + " ";
     }
 
     String getStreet() { return street; }

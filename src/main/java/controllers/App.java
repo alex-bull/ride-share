@@ -24,7 +24,6 @@ public class App extends Application {
         primaryStage.setScene(scene);
 
         database.addUser(0);
-        database.populateTimes();
 
         primaryStage.show();
     }

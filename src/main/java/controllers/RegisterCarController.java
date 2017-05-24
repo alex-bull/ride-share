@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import model.Database;
+import model.User;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -56,6 +57,6 @@ public class RegisterCarController implements Initializable {
 
     @FXML
     private void submitCarButtonPress() throws Exception {
-        database.submitCar(carFieldArrayList);
+        database.getCurrentUser().submitCar(carFieldArrayList);
     }
 }

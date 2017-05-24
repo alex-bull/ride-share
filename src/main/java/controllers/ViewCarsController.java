@@ -29,7 +29,7 @@ public class ViewCarsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         database =  App.getDatabase();
-        carListView.setItems(App.getDatabase().getUserHashMap().get(database.getUserID()).getCarArrayList());
+        carListView.setItems(App.getDatabase().getCurrentUser().getCarArrayList());
     }
 
     /**
@@ -61,7 +61,7 @@ public class ViewCarsController implements Initializable {
      */
     @FXML
     private void removeCarButtonPress(){
-        database.removeCar(carListView.getSelectionModel().getSelectedIndex());
+        database.getCurrentUser().removeCar(carListView.getSelectionModel().getSelectedIndex());
     }
 
 

@@ -36,8 +36,8 @@ public class ShareRideController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         database = App.getDatabase();
-        rideListView.setItems(database.getUserHashMap().get(database.getUserID()).getUserTrips());
-        Integer seatNum = database.getUserHashMap().get(database.getUserID()).getCarArrayList().get(0).getSeatNum();
+        rideListView.setItems(database.getUserHashMap().get(database.getCurrentUserID()).getUserTrips());
+        Integer seatNum = database.getCurrentUser().getCarArrayList().get(0).getSeatNum();
         ObservableList<Integer> nums = observableArrayList();
         for (int i = 1; i<=seatNum; i++){
             nums.add(i);
