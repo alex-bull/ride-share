@@ -18,53 +18,51 @@ import static controllers.App.getPrimaryStage;
 import static javafx.collections.FXCollections.observableArrayList;
 
 
-public class CreateRouteController implements Initializable {
+public class BookRideController implements Initializable {
 
     @FXML
     private ListView stopListView;
 
     @FXML
-    private ListView routeListView;
+    private ListView tripListView;
 
-    private Database database;
+    private Database database = getDatabase();
 
     private ObservableList<StopPoint> stopShallowCopy;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        database = getDatabase();
-        stopShallowCopy = observableArrayList(database.getStopPointArrayList());
-        stopListView.setItems(stopShallowCopy);
-        routeListView.setItems(database.getCurrentUser().getCurrentRoute());
+        stopListView.setItems(database.getStopPointArrayList());
+        tripListView.getItems().clear();
     }
 
     @FXML
-    private void loadDriverView() throws Exception{
+    private void loadPassengerView() throws Exception{
         database.getCurrentUser().clearRoute();
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("driverTools.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("passengerTools.fxml"));
         Scene scene = new Scene(root);
         getPrimaryStage().setTitle("Welcome");
         getPrimaryStage().setScene(scene);
     }
 
     @FXML
-    private void addStop(){
+    private void pointClicked(){
         Object selectedItem = stopListView.getSelectionModel().getSelectedItem();
-        database.getCurrentUser().addToRoute((StopPoint) selectedItem, stopShallowCopy);
+        tripListView.setItems(selectedItem);
         stopListView.getSelectionModel().clearSelection();
     }
-
-    @FXML
-    private void removeStop(){
-        Object selectedItem = routeListView.getSelectionModel().getSelectedItem();
-        database.getCurrentUser().removeFromRoute(selectedItem, stopShallowCopy);
-        routeListView.getSelectionModel().clearSelection();
-    }
-
-    @FXML
-    private void submitRoute() throws Exception {
-        database.getCurrentUser().submitRoute();
-        loadDriverView();
-    }
+//
+//    @FXML
+//    private void removeStop(){
+//        Object selectedItem = routeListView.getSelectionModel().getSelectedItem();
+//        database.getCurrentUser().removeFromRoute(selectedItem, stopShallowCopy);
+//        routeListView.getSelectionModel().clearSelection();
+//    }
+//
+//    @FXML
+//    private void submitRoute() throws Exception {
+//        database.getCurrentUser().submitRoute();
+//        loadDriverView();
+//    }
 
 }

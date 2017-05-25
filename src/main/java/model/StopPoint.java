@@ -1,11 +1,14 @@
 package model;
 
-import java.time.LocalTime;
+import javafx.collections.ObservableList;
+
+import static javafx.collections.FXCollections.observableArrayList;
 
 public class StopPoint {
 
     private String street;
     private String suburb;
+    private ObservableList tripsInvolvedIn = observableArrayList();
 
 
     StopPoint(String street, String suburb) {
@@ -13,15 +16,11 @@ public class StopPoint {
         this.suburb = suburb;
     }
 
-    public StopPoint newInstance(StopPoint aStopPoint) {
-        return new StopPoint(aStopPoint.street, aStopPoint.suburb);
+    public void addTripRef(Trip trip){
+        tripsInvolvedIn.add(trip);
     }
 
 
-
-    public void setStreet(String i){
-        street = i;
-    }
 
     @Override
     public String toString(){

@@ -1,16 +1,5 @@
 package model;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.TextField;
-
-import java.util.ArrayList;
-
-import static controllers.App.getDatabase;
-import static controllers.App.getPrimaryStage;
-import static javafx.fxml.FXMLLoader.getDefaultClassLoader;
-
 public class Car {
 
     private String type;

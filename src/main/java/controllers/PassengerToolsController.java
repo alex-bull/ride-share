@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 import static controllers.App.getPrimaryStage;
 
 
-public class PassengerController implements Initializable {
+public class PassengerToolsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -20,7 +20,15 @@ public class PassengerController implements Initializable {
     }
 
     @FXML
-    private void loadMainView() throws Exception{
+    private void loadBookRideView() throws Exception{
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("bookRide.fxml"));
+        Scene scene = new Scene(root);
+        getPrimaryStage().setTitle("Browse Stop Points");
+        getPrimaryStage().setScene(scene);
+    }
+
+    @FXML
+    private void loadMainMenuView() throws Exception{
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("mainMenu.fxml"));
         Scene scene = new Scene(root);
         getPrimaryStage().setTitle("Welcome");

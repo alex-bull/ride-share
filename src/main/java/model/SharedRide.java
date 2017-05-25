@@ -2,9 +2,6 @@ package model;
 
 import javafx.collections.ObservableList;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-
 import static javafx.collections.FXCollections.observableArrayList;
 
 public class SharedRide {

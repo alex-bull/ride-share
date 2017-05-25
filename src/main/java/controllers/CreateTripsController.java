@@ -11,10 +11,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import model.Database;
-import model.StopPoint;
-import model.Trip;
 
-import javax.swing.text.TableView;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalTime;

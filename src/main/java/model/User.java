@@ -1,7 +1,6 @@
 package model;
 
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,12 +10,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
 
 import static controllers.App.getDatabase;
 import static controllers.App.getPrimaryStage;
 import static javafx.collections.FXCollections.observableArrayList;
-import static javafx.collections.FXCollections.observableHashMap;
 import static javafx.fxml.FXMLLoader.getDefaultClassLoader;
 
 
@@ -24,7 +21,7 @@ public class User {
 
     private Database database = getDatabase();
     private Integer UserID;
-    private ObservableList<StopPoint> route = observableArrayList();
+    private ObservableList<StopPoint> currentRoute = observableArrayList();
     private ObservableList<ObservableList> routeArrayList = observableArrayList();
     private ObservableList<Car> carArrayList = observableArrayList();
     private ObservableList<Trip> userTrips = observableArrayList();
@@ -40,8 +37,8 @@ public class User {
         return UserID;
     }
 
-    public ObservableList<StopPoint> getRoute() {
-        return route;
+    public ObservableList<StopPoint> getCurrentRoute() {
+        return currentRoute;
     }
 
     public ObservableList<ObservableList> getRouteArrayList() {
@@ -97,7 +94,7 @@ public class User {
 
     public void addToRoute(StopPoint stop, ObservableList<StopPoint> stopShallowCopy) {
         if (stop != null) {
-            route.add(stop);
+            currentRoute.add(stop);
             stopShallowCopy.remove(stop);
             System.out.println(stop + "added");
 //            System.out.println("route " + route + "               shallowcopy " + stopShallowCopy + "              original " + getDatabase().getStopPointArrayList());
@@ -106,7 +103,7 @@ public class User {
 
     public void removeFromRoute(Object stop, ObservableList<StopPoint> stopShallowCopy) {
         if (stop != null) {
-            route.remove(stop);
+            currentRoute.remove(stop);
             stopShallowCopy.add((StopPoint) stop);
             System.out.println(stop + "removed");
 //            System.out.println("route " + route + "               shallowcopy " + stopShallowCopy + "              original " + getDatabase().getStopPointArrayList());
@@ -114,12 +111,12 @@ public class User {
     }
 
     public void clearRoute() {
-        route.clear();
+        currentRoute.clear();
     }
 
     public void submitRoute() {
         ObservableList newRoute = observableArrayList();
-        for (StopPoint item : route) {
+        for (StopPoint item : currentRoute) {
             newRoute.add(item);
         }
         routeArrayList.add(newRoute);

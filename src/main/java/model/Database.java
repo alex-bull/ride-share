@@ -6,11 +6,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import static controllers.App.getPrimaryStage;
 import static javafx.collections.FXCollections.observableArrayList;
@@ -81,7 +81,11 @@ public class Database{
 
 
     public void submitSharedRide(Object route, Object seatNum) {
-        sharedRides.add(new SharedRide(observableArrayList(route), (Integer) seatNum, getCurrentUser()));
+        ArrayList<ArrayList> tripRoute = new ArrayList(Arrays.asList(route));
+        for (ArrayList pointToAddTripRef : tripRoute ){
+            (pointToAddTripRef.get(0).
+        }
+        sharedRides.add(new SharedRide(observableArrayList(tripRoute), (Integer) seatNum, getCurrentUser()));
         System.out.println(sharedRides);
         System.out.println(sharedRides.get(0).toString());
     }
