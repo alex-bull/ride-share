@@ -8,7 +8,7 @@ public class StopPoint {
 
     private String street;
     private String suburb;
-    private ObservableList tripsInvolvedIn = observableArrayList();
+    private ObservableList ridesInvolvedIn = observableArrayList();
 
 
     StopPoint(String street, String suburb) {
@@ -16,8 +16,12 @@ public class StopPoint {
         this.suburb = suburb;
     }
 
-    public void addTripRef(Trip trip){
-        tripsInvolvedIn.add(trip);
+    public void addRideRef(SharedRide ride){
+        ridesInvolvedIn.add(ride);
+    }
+
+    public ObservableList getRideRefs(){
+        return ridesInvolvedIn;
     }
 
 
@@ -27,8 +31,8 @@ public class StopPoint {
         return street + " " + suburb + " ";
     }
 
-    String getStreet() { return street; }
+    public String getStreet() { return street; }
 
-    String getSuburb() { return suburb; }
+    public String getSuburb() { return suburb; }
 
 }

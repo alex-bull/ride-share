@@ -9,8 +9,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import model.Database;
+import model.Trip;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import static controllers.App.getPrimaryStage;
@@ -51,7 +55,7 @@ public class ShareRideController implements Initializable {
     @FXML
     private void shareRide() throws Exception {
         if(!seatsComboBox.getSelectionModel().isEmpty() && !rideListView.getSelectionModel().isEmpty()){
-            database.submitSharedRide(rideListView.getSelectionModel().getSelectedItem(), seatsComboBox.getSelectionModel().getSelectedItem());
+            database.submitSharedRide((Trip) rideListView.getSelectionModel().getSelectedItem(), (Integer) seatsComboBox.getSelectionModel().getSelectedItem());
             loadDriverView();
         }
     }

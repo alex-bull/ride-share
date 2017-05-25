@@ -7,11 +7,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 
 import java.lang.reflect.Array;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import static controllers.App.getDatabase;
 import static controllers.App.getPrimaryStage;
 import static javafx.collections.FXCollections.observableArrayList;
 import static javafx.fxml.FXMLLoader.getDefaultClassLoader;
@@ -80,13 +82,14 @@ public class Database{
 
 
 
-    public void submitSharedRide(Object route, Object seatNum) {
-        ArrayList<ArrayList> tripRoute = new ArrayList(Arrays.asList(route));
-        for (ArrayList pointToAddTripRef : tripRoute ){
-            (pointToAddTripRef.get(0).
+    public void submitSharedRide(Trip trip, Integer seatNum) {
+        ArrayList<ArrayList> tripRoute = new ArrayList<>(trip.getRoute());
+        sharedRides.add(new SharedRide(observableArrayList(tripRoute), seatNum, getCurrentUser()));
+        for (ArrayList<StopPoint> pointToAddRideRef : tripRoute ){
+            pointToAddRideRef.get(0).addRideRef(sharedRides.get(sharedRides.size() - 1));
         }
-        sharedRides.add(new SharedRide(observableArrayList(tripRoute), (Integer) seatNum, getCurrentUser()));
         System.out.println(sharedRides);
         System.out.println(sharedRides.get(0).toString());
+        System.out.println(stopPointArrayList.get(0).getRideRefs().toString());
     }
 }
