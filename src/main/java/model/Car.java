@@ -22,6 +22,23 @@ public class Car {
         return seatNum;
     }
 
+    public String getModel() {
+        return model;
+    }
+
+    public String getColour() {
+        return colour;
+    }
+
+    public String getLicense() {
+        return license;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+
     @Override
     public String toString(){
         return model + " " + year;

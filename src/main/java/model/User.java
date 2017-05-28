@@ -21,6 +21,7 @@ public class User {
 
     private Database database = getDatabase();
     private Integer UserID;
+    private String UserName;
     private ObservableList<StopPoint> currentRoute = observableArrayList();
     private ObservableList<ObservableList> routeArrayList = observableArrayList();
     private ObservableList<Car> carArrayList = observableArrayList();
@@ -28,14 +29,17 @@ public class User {
     private Trip currentTrip;
 
 
-    User(Integer UserID) {
+    User(Integer UserID, String Username) {
         this.UserID = UserID;
+        this.UserName = Username;
     }
 
 
     public Integer getUserID() {
         return UserID;
     }
+
+    public String getUserName() { return  UserName; }
 
     public ObservableList<StopPoint> getCurrentRoute() {
         return currentRoute;
@@ -56,6 +60,7 @@ public class User {
     public ObservableList<ArrayList> getCurrentTripRoute() {
         return currentTrip.getRoute();
     }
+
 
     public void setCurrentTripRoute(ObservableList<StopPoint> routeToExpand) {
         ObservableList<ArrayList> expandedRoute = observableArrayList();

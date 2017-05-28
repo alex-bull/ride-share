@@ -17,6 +17,8 @@ import static controllers.App.getPrimaryStage;
 public class CreateStopsController implements Initializable{
 
     @FXML
+    private TextField streetNumberField;
+    @FXML
     private TextField streetField;
     @FXML
     private TextField suburbField;
@@ -31,6 +33,7 @@ public class CreateStopsController implements Initializable{
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        pointFieldArrayList.add(streetNumberField);
         pointFieldArrayList.add(streetField);
         pointFieldArrayList.add(suburbField);
     }

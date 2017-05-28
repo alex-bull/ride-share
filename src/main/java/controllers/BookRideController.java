@@ -14,6 +14,7 @@ import model.Database;
 import model.SharedRide;
 import model.StopPoint;
 
+import javax.swing.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -32,6 +33,9 @@ public class BookRideController implements Initializable {
     private ListView<SharedRide> rideListView;
 
     @FXML
+    private TableColumn<StopPoint, String> streetNumberColumn;
+
+    @FXML
     private TableColumn<StopPoint, String> streetColumn;
 
     @FXML
@@ -42,6 +46,7 @@ public class BookRideController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         stopTableView.setItems(database.getStopPointArrayList());
+        streetNumberColumn.setCellValueFactory(new PropertyValueFactory<>("number"));
         streetColumn.setCellValueFactory(new PropertyValueFactory<>("street"));
         suburbColumn.setCellValueFactory(new PropertyValueFactory<>("suburb"));
         rideListView.getItems().clear();
@@ -67,20 +72,21 @@ public class BookRideController implements Initializable {
         }
         rideListView.setItems(availableRides);
         System.out.println(availableRides);
-//        stopTableView.getSelectionModel().clearSelection();
     }
-//
-//    @FXML
-//    private void removeStop(){
-//        Object selectedItem = routeListView.getSelectionModel().getSelectedItem();
-//        database.getCurrentUser().removeFromRoute(selectedItem, stopShallowCopy);
-//        routeListView.getSelectionModel().clearSelection();
-//    }
-//
-//    @FXML
-//    private void submitRoute() throws Exception {
-//        database.getCurrentUser().submitRoute();
-//        loadDriverView();
-//    }
+
+    @FXML
+    private void nextClicked() throws Exception {
+        SharedRide selectedRide = rideListView.getSelectionModel().getSelectedItem();
+        if (selectedRide != null) {
+            int choice = JOptionPane.showConfirmDialog(null, "This ride will be provided by " + selectedRide.getDriver().getUserName() + ".\n" +
+            "He will be driving a " + selectedRide.getDriver().getCarArrayList().get(0).getColour() + " " + selectedRide.getDriver().getCarArrayList().get(0).getYear() +
+            " " + selectedRide.getDriver().getCarArrayList().get(0).getModel() + " with the license plate " + selectedRide.getDriver().getCarArrayList().get(0).getLicense() +
+            ".\nThere are " + selectedRide.getAvailableSeats() + " available seat(s) remaining.\nWould you like to book this ride?", "Details/Confirm Booking", JOptionPane.YES_NO_OPTION);
+            if (choice == 0){
+                selectedRide.bookRide(database.getCurrentUser());
+                loadPassengerView();
+            }
+        }
+    }
 
 }

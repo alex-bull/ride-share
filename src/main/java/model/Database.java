@@ -27,8 +27,8 @@ public class Database{
     public ObservableList<StopPoint> getStopPointArrayList() { return stopPointArrayList; }
 
     private HashMap<Integer, User> userHashMap = new HashMap<>();
-    public void addUser(Integer ID){
-        userHashMap.put(0, new User(ID));
+    public void addUser(Integer ID, String Username){
+        userHashMap.put(0, new User(ID, Username));
     }
     public HashMap<Integer, User> getUserHashMap(){
         return userHashMap;
@@ -58,10 +58,11 @@ public class Database{
 
     public void submitPoint(ArrayList<TextField> pointFieldArrayList) throws Exception {
         if((!pointFieldArrayList.get(0).getText().isEmpty()) && (!pointFieldArrayList.get(1).getText().isEmpty()) && (!checkForDuplicates(pointFieldArrayList))){
-            stopPointArrayList.add(new StopPoint(pointFieldArrayList.get(0).getText(), pointFieldArrayList.get(1).getText()));
+            stopPointArrayList.add(new StopPoint(pointFieldArrayList.get(1).getText(), pointFieldArrayList.get(2).getText(), Integer.parseInt(pointFieldArrayList.get(0).getText())));
             System.out.println("Point added");
             System.out.println(pointFieldArrayList.get(0).getText());
             System.out.println(pointFieldArrayList.get(1).getText());
+            System.out.println(pointFieldArrayList.get(2).getText());
 
             Parent root = FXMLLoader.load(getDefaultClassLoader().getResource("driverTools.fxml"));
             Scene scene = new Scene(root);

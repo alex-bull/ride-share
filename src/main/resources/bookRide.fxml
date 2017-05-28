@@ -22,10 +22,11 @@
         </Label>
       <Button fx:id="backButton" layoutX="43.0" layoutY="344.0" mnemonicParsing="false" onAction="#loadPassengerView" text="Back" />
       <ListView fx:id="rideListView" layoutX="307.0" layoutY="100.0" prefHeight="219.0" prefWidth="200.0" />
-      <Button fx:id="nextButton" layoutX="493.0" layoutY="344.0" mnemonicParsing="false" text="Next" />
+      <Button fx:id="nextButton" layoutX="493.0" layoutY="344.0" mnemonicParsing="false" onAction="#nextClicked" text="Next" />
       <TableView fx:id="stopTableView" layoutX="83.0" layoutY="100.0" onMouseClicked="#pointClicked" prefHeight="219.0" prefWidth="200.0">
         <columns>
-          <TableColumn fx:id="streetColumn" prefWidth="116.42855834960938" text="Street" />
+            <TableColumn fx:id="streetNumberColumn" prefWidth="36.0" text="#" />
+          <TableColumn fx:id="streetColumn" prefWidth="198.0" text="Street" />
           <TableColumn fx:id="suburbColumn" prefWidth="82.57144165039062" text="Suburb" />
         </columns>
       </TableView>
