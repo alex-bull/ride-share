@@ -49,6 +49,8 @@ public class Trip {
         this.direction = direction;
     }
 
+    public Integer getDirection(){ return direction; }
+
 
     @Override
     public String toString() {

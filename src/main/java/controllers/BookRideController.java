@@ -6,10 +6,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import model.Database;
 import model.SharedRide;
 import model.StopPoint;
@@ -41,6 +40,17 @@ public class BookRideController implements Initializable {
     @FXML
     private TableColumn<StopPoint, String> suburbColumn;
 
+    @FXML
+    private TextField searchTextField;
+
+    @FXML
+    private RadioButton toUniRadioButton;
+
+    @FXML
+    private RadioButton fromUniRadioButton;
+
+
+
     private Database database = getDatabase();
 
     @Override
@@ -50,6 +60,8 @@ public class BookRideController implements Initializable {
         streetColumn.setCellValueFactory(new PropertyValueFactory<>("street"));
         suburbColumn.setCellValueFactory(new PropertyValueFactory<>("suburb"));
         rideListView.getItems().clear();
+        searchTextField.clear();
+        toUniRadioButton.setSelected(true);
     }
 
     @FXML
@@ -63,15 +75,18 @@ public class BookRideController implements Initializable {
 
     @FXML
     private void pointClicked(){
+        toUniRadioButton.setSelected(true);
         StopPoint selectedPoint = stopTableView.getSelectionModel().getSelectedItem();
-        ObservableList<SharedRide> availableRides = observableArrayList();
-        for (Object aRide: selectedPoint.getRideRefs()){
-            if (((SharedRide) aRide).getAvailableSeats() > 0){
-                availableRides.add((SharedRide) aRide);
+        if (selectedPoint != null) {
+            ObservableList<SharedRide> availableRides = observableArrayList();
+            for (Object aRide : selectedPoint.getRideRefs()) {
+                if (((SharedRide) aRide).getAvailableSeats() > 0 && ((SharedRide) aRide).getTripData().getDirection() == 0) {
+                    availableRides.add((SharedRide) aRide);
+                }
             }
+            rideListView.setItems(availableRides);
+            System.out.println(availableRides);
         }
-        rideListView.setItems(availableRides);
-        System.out.println(availableRides);
     }
 
     @FXML
@@ -89,4 +104,37 @@ public class BookRideController implements Initializable {
         }
     }
 
+    @FXML
+    public void searchUpdate() {
+        String searchTerm = searchTextField.getText();
+        ObservableList<StopPoint> matchingPoints = observableArrayList();
+        for(StopPoint point : database.getStopPointArrayList()){
+            if ((point.getNumber() + " " + point.getStreet() + " " + point.getSuburb()).contains(searchTerm)){
+                matchingPoints.add(point);
+            }
+        }
+        stopTableView.setItems(matchingPoints);
+    }
+
+    @FXML
+    public void directionChange(){
+        StopPoint selectedPoint = stopTableView.getSelectionModel().getSelectedItem();
+        ObservableList<SharedRide> applicableRides = observableArrayList();
+        if (selectedPoint != null) {
+            if (toUniRadioButton.isSelected()) {
+                for (Object aRide : selectedPoint.getRideRefs()) {
+                    if (((SharedRide) aRide).getAvailableSeats() > 0 && ((SharedRide) aRide).getTripData().getDirection() == 0) {
+                        applicableRides.add((SharedRide) aRide);
+                    }
+                }
+            } else if (fromUniRadioButton.isSelected()) {
+                for (Object aRide : selectedPoint.getRideRefs()) {
+                    if (((SharedRide) aRide).getAvailableSeats() > 0 && ((SharedRide) aRide).getTripData().getDirection() == 1) {
+                        applicableRides.add((SharedRide) aRide);
+                    }
+                }
+            }
+            rideListView.setItems(applicableRides);
+        }
+    }
 }

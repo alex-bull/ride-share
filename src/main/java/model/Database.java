@@ -85,7 +85,7 @@ public class Database{
 
     public void submitSharedRide(Trip trip, Integer seatNum) {
         ArrayList<ArrayList> tripRoute = new ArrayList<>(trip.getRoute());
-        sharedRides.add(new SharedRide(observableArrayList(tripRoute), seatNum, getCurrentUser()));
+        sharedRides.add(new SharedRide(trip, seatNum, getCurrentUser()));
         for (ArrayList<StopPoint> pointToAddRideRef : tripRoute ){
             pointToAddRideRef.get(0).addRideRef(sharedRides.get(sharedRides.size() - 1));
         }

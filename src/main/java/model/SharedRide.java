@@ -8,16 +8,18 @@ import static javafx.collections.FXCollections.observableArrayList;
 
 public class SharedRide {
 
-    private ObservableList<ArrayList> route = observableArrayList();
+    private Trip tripData;
+    private ObservableList<ArrayList> route;
     private Integer availableSeats;
     private User driver;
     private ObservableList<User> usersOnRide = observableArrayList();
 
 
-    SharedRide(ObservableList<ArrayList> route, Integer availableSeats, User driver) {
-        this.route = route;
+    SharedRide(Trip tripData, Integer availableSeats, User driver) {
+        this.tripData = tripData;
         this.availableSeats = availableSeats;
         this.driver = driver;
+        this.route = tripData.getRoute();
     }
 
     public Integer getAvailableSeats() {
@@ -25,6 +27,10 @@ public class SharedRide {
     }
 
     public User getDriver(){ return driver; }
+
+    public Trip getTripData(){ return tripData; }
+
+
 
     @Override
     public String toString() {
