@@ -56,6 +56,13 @@ public class RegisterCarController implements Initializable {
 
     @FXML
     private void submitCarButtonPress() throws Exception {
-        database.getCurrentUser().submitCar(carFieldArrayList);
+        try {
+            if(database.getCurrentUser().submitCar(typeField.getText(), modelField.getText(), colourField.getText(), licenseField.getText(), yearField.getText(), Integer.parseInt(seatNumField.getText()), carFieldArrayList)){
+                loadViewCarsView();
+            }
+        } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 }

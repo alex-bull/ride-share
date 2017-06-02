@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RegisterCarController">
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RegisterCarController">
     <children>
         <Label layoutX="241.0" layoutY="14.0" text="Register Car" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
             <font>
@@ -21,12 +26,12 @@
       <TextField fx:id="licenseField" layoutX="283.0" layoutY="218.0" prefHeight="25.0" prefWidth="258.0" promptText="Enter details here" />
       <TextField fx:id="yearField" layoutX="283.0" layoutY="255.0" prefHeight="25.0" prefWidth="258.0" promptText="Enter details here" />
       <TextField fx:id="seatNumField" layoutX="283.0" layoutY="292.0" prefHeight="25.0" prefWidth="258.0" promptText="Enter details here" />
-      <Label layoutX="181.0" layoutY="110.0" text="Type" />
-      <Label layoutX="180.0" layoutY="146.0" text="Model" />
-      <Label layoutX="180.0" layoutY="183.0" text="Colour" />
-      <Label layoutX="180.0" layoutY="220.0" text="License Plate" />
-      <Label layoutX="182.0" layoutY="257.0" text="Year" />
-      <Label layoutX="182.0" layoutY="294.0" text="Number Of Seats" />
+      <Label layoutX="163.0" layoutY="113.0" text="Type" />
+      <Label layoutX="162.0" layoutY="149.0" text="Model" />
+      <Label layoutX="162.0" layoutY="186.0" text="Colour" />
+      <Label layoutX="162.0" layoutY="223.0" text="License Plate" />
+      <Label layoutX="164.0" layoutY="260.0" text="Year" />
+      <Label layoutX="164.0" layoutY="297.0" text="Number Of Seats" />
       <Button fx:id="backButton" layoutX="43.0" layoutY="344.0" mnemonicParsing="false" onAction="#loadViewCarsView" text="Back" />
       <Button fx:id="submitButton" layoutX="366.0" layoutY="344.0" mnemonicParsing="false" onAction="#submitCarButtonPress" text="Submit Car" />
     </children>

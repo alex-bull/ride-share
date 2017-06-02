@@ -57,7 +57,9 @@ public class CreateStopsController implements Initializable{
      */
     @FXML
     private void submitButtonPress() throws Exception {
-        App.getDatabase().submitPoint(pointFieldArrayList);
+        if(App.getDatabase().submitPoint(streetNumberField.getText(), streetField.getText(), suburbField.getText(), pointFieldArrayList)){
+            loadDriverView();
+        }
     }
 
 

@@ -9,7 +9,7 @@ public class Car {
     private String year;
     private Integer seatNum;
 
-    Car(String type, String model, String colour, String license, String year, Integer seatNum) {
+    public Car(String type, String model, String colour, String license, String year, Integer seatNum) {
         this.type = type;
         this.model = model;
         this.colour = colour;
@@ -36,6 +36,10 @@ public class Car {
 
     public String getYear() {
         return year;
+    }
+
+    public String getType() {
+        return type;
     }
 
 

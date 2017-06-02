@@ -12,7 +12,7 @@ public class StopPoint {
     private ObservableList ridesInvolvedIn = observableArrayList();
 
 
-    StopPoint(String street, String suburb , Integer number){
+    public StopPoint(Integer number, String street, String suburb){
         this.street = street;
         this.suburb = suburb;
         this.number = number;

@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CreateTripsController">
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CreateTripsController">
     <children>
         <Label layoutX="206.0" layoutY="14.0" text="Create a New Trip" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
             <font>
@@ -16,23 +21,23 @@
          </padding>
         </Label>
       <Button fx:id="backButton" layoutX="43.0" layoutY="344.0" mnemonicParsing="false" onAction="#loadDriverView" text="Back" />
-      <ListView fx:id="routeListView" layoutX="93.0" layoutY="100.0" onMouseClicked="#expandSelectedRoute" prefHeight="200.0" prefWidth="200.0" />
-      <ListView fx:id="expandedListView" editable="true" layoutX="333.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" />
+      <ListView fx:id="routeListView" layoutX="38.0" layoutY="85.0" onMouseClicked="#expandSelectedRoute" prefHeight="200.0" prefWidth="200.0" />
+      <ListView fx:id="expandedListView" editable="true" layoutX="252.0" layoutY="85.0" prefHeight="200.0" prefWidth="266.0" />
       <DatePicker fx:id="recurrenceDate" disable="true" layoutX="324.0" layoutY="357.0" onAction="#updateDate" prefHeight="25.0" prefWidth="185.0" promptText="Enter Recurrence End Date" />
-      <CheckBox fx:id="recurrentCheck" layoutX="215.0" layoutY="362.0" mnemonicParsing="false" onAction="#updateRecurrent" text="Recurring Trip?" />
-      <CheckBox fx:id="monCheck" layoutX="540.0" layoutY="124.0" mnemonicParsing="false" onAction="#updateDays" text="Mon" />
-      <CheckBox fx:id="tueCheck" layoutX="540.0" layoutY="150.0" mnemonicParsing="false" onAction="#updateDays" text="Tues" />
-      <CheckBox fx:id="wedCheck" layoutX="540.0" layoutY="175.0" mnemonicParsing="false" onAction="#updateDays" text="Wed" />
-      <CheckBox fx:id="thuCheck" layoutX="540.0" layoutY="203.0" mnemonicParsing="false" onAction="#updateDays" text="Thur" />
-      <CheckBox fx:id="friCheck" layoutX="540.0" layoutY="230.0" mnemonicParsing="false" onAction="#updateDays" text="Fri" />
-      <CheckBox fx:id="satCheck" layoutX="540.0" layoutY="257.0" mnemonicParsing="false" onAction="#updateDays" text="Sat" />
-      <CheckBox fx:id="sunCheck" layoutX="540.0" layoutY="283.0" mnemonicParsing="false" onAction="#updateDays" text="Sun" />
-      <Label layoutX="536.0" layoutY="77.0" prefHeight="42.0" prefWidth="57.0" text="Occurring Days:" textAlignment="CENTER" wrapText="true" />
+      <CheckBox fx:id="recurrentCheck" layoutX="193.0" layoutY="362.0" mnemonicParsing="false" onAction="#updateRecurrent" text="Recurring Trip?" />
+      <CheckBox fx:id="monCheck" layoutX="535.0" layoutY="124.0" mnemonicParsing="false" onAction="#updateDays" text="Mon" />
+      <CheckBox fx:id="tueCheck" layoutX="535.0" layoutY="150.0" mnemonicParsing="false" onAction="#updateDays" text="Tues" />
+      <CheckBox fx:id="wedCheck" layoutX="535.0" layoutY="175.0" mnemonicParsing="false" onAction="#updateDays" text="Wed" />
+      <CheckBox fx:id="thuCheck" layoutX="535.0" layoutY="203.0" mnemonicParsing="false" onAction="#updateDays" text="Thur" />
+      <CheckBox fx:id="friCheck" layoutX="535.0" layoutY="230.0" mnemonicParsing="false" onAction="#updateDays" text="Fri" />
+      <CheckBox fx:id="satCheck" layoutX="535.0" layoutY="257.0" mnemonicParsing="false" onAction="#updateDays" text="Sat" />
+      <CheckBox fx:id="sunCheck" layoutX="535.0" layoutY="283.0" mnemonicParsing="false" onAction="#updateDays" text="Sun" />
+      <Label layoutX="528.0" layoutY="77.0" prefHeight="42.0" prefWidth="65.0" text="Occurring Days:" textAlignment="CENTER" wrapText="true" />
       <Button fx:id="submitButton" layoutX="530.0" layoutY="357.0" mnemonicParsing="false" onAction="#submitTrip" text="Submit" />
-      <ComboBox fx:id="timesCombo" layoutX="358.0" layoutY="319.0" onAction="#updateTime" prefWidth="150.0" />
-      <Label layoutX="242.0" layoutY="323.0" text="Change Pickup Time:" />
-      <Label layoutX="93.0" layoutY="317.0" text="Direction:" />
-      <CheckBox fx:id="toUniCheckBox" layoutX="148.0" layoutY="318.0" mnemonicParsing="false" onAction="#toUniClicked" selected="true" text="To Uni" />
-      <CheckBox fx:id="fromUniCheckBox" layoutX="148.0" layoutY="338.0" mnemonicParsing="false" onAction="#fromUniClicked" text="From Uni" />
+      <ComboBox fx:id="timesCombo" layoutX="370.0" layoutY="312.0" onAction="#updateTime" prefWidth="150.0" />
+      <Label layoutX="227.0" layoutY="316.0" text="Change Pickup Time:" />
+      <Label layoutX="52.0" layoutY="305.0" text="Direction:" />
+      <CheckBox fx:id="toUniCheckBox" layoutX="122.0" layoutY="303.0" mnemonicParsing="false" onAction="#toUniClicked" selected="true" text="To Uni" />
+      <CheckBox fx:id="fromUniCheckBox" layoutX="122.0" layoutY="325.0" mnemonicParsing="false" onAction="#fromUniClicked" text="From Uni" />
     </children>
 </Pane>

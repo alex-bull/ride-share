@@ -1,20 +1,16 @@
 package model;
 
 import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 import static controllers.App.getDatabase;
-import static controllers.App.getPrimaryStage;
 import static javafx.collections.FXCollections.observableArrayList;
-import static javafx.fxml.FXMLLoader.getDefaultClassLoader;
 
 
 public class User {
@@ -29,7 +25,7 @@ public class User {
     private Trip currentTrip;
 
 
-    User(Integer UserID, String Username) {
+    public User(Integer UserID, String Username) {
         this.UserID = UserID;
         this.UserName = Username;
     }
@@ -70,16 +66,13 @@ public class User {
         currentTrip.setRoute(expandedRoute);
     }
 
-    public void submitCar(ArrayList<TextField> carFieldArrayList) throws Exception {
-        if ((!carFieldArrayList.get(0).getText().isEmpty()) && (!carFieldArrayList.get(1).getText().isEmpty()) && (!carFieldArrayList.get(2).getText().isEmpty()) && (!carFieldArrayList.get(3).getText().isEmpty()) && (!carFieldArrayList.get(4).getText().isEmpty()) && (!carFieldArrayList.get(5).getText().isEmpty())) {
-            database.getUserHashMap().get(UserID).getCarArrayList().add(new Car(carFieldArrayList.get(0).getText(), carFieldArrayList.get(1).getText(), carFieldArrayList.get(2).getText(), carFieldArrayList.get(3).getText(), carFieldArrayList.get(4).getText(), Integer.parseInt(carFieldArrayList.get(5).getText())));
-            System.out.println("Car added");
-            System.out.println(carFieldArrayList.get(0).getText());
-
-            Parent root = FXMLLoader.load(getDefaultClassLoader().getResource("viewCars.fxml"));
-            Scene scene = new Scene(root);
-            getPrimaryStage().setTitle("Welcome");
-            getPrimaryStage().setScene(scene);
+    public boolean submitCar(String type, String model, String colour, String license, String year, Integer seatNum, ArrayList<TextField> carFieldArrayList) throws Exception {
+        if (!Objects.equals(type, "") && !Objects.equals(model, "") && !Objects.equals(colour, "") && !Objects.equals(license, "") && !Objects.equals(year, "") && seatNum != null) {
+            System.out.println(type.getClass() + model + colour);
+            database.getUserHashMap().get(UserID).getCarArrayList().add(new Car(type, model, colour, license, year, seatNum));
+            return true;
+//            System.out.println("Car added");
+//            System.out.println(carFieldArrayList.get(0).getText());
         } else {
             for (TextField field : carFieldArrayList) {
                 if (field.getText().isEmpty()) {
@@ -91,10 +84,15 @@ public class User {
                 }
             }
         }
+        return false;
     }
 
     public void removeCar(int indexOfSelected) {
-        getDatabase().getCurrentUser().getCarArrayList().remove(indexOfSelected);
+        try {
+            getDatabase().getCurrentUser().getCarArrayList().remove(indexOfSelected);
+        } catch (ArrayIndexOutOfBoundsException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public void addToRoute(StopPoint stop, ObservableList<StopPoint> stopShallowCopy) {
@@ -119,13 +117,17 @@ public class User {
         currentRoute.clear();
     }
 
-    public void submitRoute() {
+    public boolean submitRoute() {
         ObservableList newRoute = observableArrayList();
         for (StopPoint item : currentRoute) {
             newRoute.add(item);
         }
-        routeArrayList.add(newRoute);
-        System.out.println("Route array list is: " + routeArrayList);
+        if (!newRoute.isEmpty()){
+            routeArrayList.add(newRoute);
+            System.out.println("Route array list is: " + routeArrayList);
+            return true;
+        }
+        return false;
     }
 
     public void updateRecurrentDays(Boolean Mon, Boolean Tue, Boolean Wed, Boolean Thu, Boolean Fri, Boolean Sat, Boolean Sun) {

@@ -32,6 +32,10 @@ public class App extends Application {
         return database;
     }
 
+    public static void setDatabase(Database newDatabase){
+        database = newDatabase;
+    }
+
     public static Stage getPrimaryStage(){
         return primaryStage;
     }

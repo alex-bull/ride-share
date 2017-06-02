@@ -63,8 +63,9 @@ public class CreateRouteController implements Initializable {
 
     @FXML
     private void submitRoute() throws Exception {
-        database.getCurrentUser().submitRoute();
-        loadDriverView();
+        if (database.getCurrentUser().submitRoute()){
+            loadDriverView();
+        }
     }
 
 }
